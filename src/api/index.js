@@ -51,3 +51,28 @@ export const fetchCountries = async () => {
     console.log(error);
   }
 };
+
+export const fetchDailyDataStateWiseIndia = async () => {
+  try {
+    const {
+      data: { statewise },
+    } = await axios.get(`https://api.covid19india.org/data.json`);
+
+    console.log("Data ====", statewise);
+    const modifiedData = statewise.map((dailyData) => ({
+      state: dailyData.state,
+      active: dailyData.active,
+      confirmed: dailyData.confirmed,
+      deaths: dailyData.deaths,
+      recovered: dailyData.recovered,
+      date: dailyData.lastupdatedtime,
+    }));
+
+    console.log(modifiedData);
+    return modifiedData.sort(function (x, y) {
+      return x.confirmed - y.confirmed;
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};

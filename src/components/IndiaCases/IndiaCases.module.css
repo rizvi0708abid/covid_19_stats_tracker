@@ -1,0 +1,14 @@
+.tableHeading {
+  text-align: center;
+  color: black;
+  padding-bottom: 20px;
+}
+
+.buttonBack {
+  padding-top: 5px;
+  margin-left: auto;
+}
+
+.Total {
+  background-color: rgb(247, 113, 113) !important;
+}
