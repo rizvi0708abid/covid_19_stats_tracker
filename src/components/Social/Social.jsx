@@ -9,7 +9,7 @@ export default function Social() {
   return (
     <div className={Styles.social}>
       <Grid>
-        <a href="#">
+        <a href="https://www.twitter.com/@abid72rizvi">
           <Grid item component={TwitterIcon} />
         </a>
         <a href="https://www.linkedin.com/in/abid72rizvi">
