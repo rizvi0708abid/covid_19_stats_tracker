@@ -15,43 +15,39 @@ const columns = [
   {
     id: "State",
     label: "State",
-    minWidth: 170,
+    minWidth: 120,
     align: "left",
     format: (value) => value.toLocaleString("en-US"),
   },
   {
     id: "Confirmed",
     label: "Confirmed",
-    minWidth: 170,
+    minWidth: 120,
     align: "left",
     format: (value) => value.toLocaleString("en-US"),
   },
   {
     id: "Active",
     label: "Active",
-    minWidth: 170,
+    minWidth: 120,
     align: "left",
     format: (value) => value.toLocaleString("en-US"),
   },
   {
     id: "Recovered",
     label: "Recovered",
-    minWidth: 170,
+    minWidth: 120,
     align: "left",
     format: (value) => value.toFixed(2),
   },
   {
     id: "Deaths",
     label: "Deaths",
-    minWidth: 170,
+    minWidth: 120,
     align: "left",
     format: (value) => value.toLocaleString("en-US"),
   },
 ];
-
-function createData(confirmed, active, recovered, deaths) {
-  return { confirmed, active, recovered, deaths };
-}
 
 const useStyles = makeStyles({
   root: {
@@ -65,7 +61,7 @@ const useStyles = makeStyles({
 export default function IndiaCases({ statewise, setShowTable }) {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(8);
+  const [rowsPerPage, setRowsPerPage] = React.useState(40);
   let rows = statewise;
   console.log("statewise", statewise);
 
@@ -82,6 +78,24 @@ export default function IndiaCases({ statewise, setShowTable }) {
     setPage(0);
   };
 
+  let rowStyleColor = (i) => {
+    const color = {
+      color: null,
+    };
+    if (i == 1) {
+      color.color = "blue";
+    } else if (i == 2) {
+      color.color = "orange";
+    } else if (i == 3) {
+      color.color = "green";
+    } else if (i == 4) {
+      color.color = "red";
+    } else {
+      color.color = null;
+    }
+    return color;
+  };
+
   if (!statewise) return "Loading";
 
   return (
@@ -94,12 +108,13 @@ export default function IndiaCases({ statewise, setShowTable }) {
         <TableContainer className={classes.container}>
           <Table stickyHeader aria-label="sticky table">
             <TableHead>
-              <TableRow>
-                {columns.map((column) => (
+              <TableRow style={{ maxWidth: "auto", margin: "3% 5%" }}>
+                {columns.map((column, i) => (
                   <TableCell
                     key={column.id}
                     align={column.align}
                     style={{ minWidth: column.minWidth }}
+                    style={rowStyleColor(i)}
                   >
                     {column.label}
                   </TableCell>
@@ -118,6 +133,7 @@ export default function IndiaCases({ statewise, setShowTable }) {
                       role="checkbox"
                       tabIndex={-1}
                       key={state}
+                      style={{ maxWidth: "auto", margin: "3% 5%" }}
                       style={
                         state === "Total"
                           ? {
@@ -130,10 +146,18 @@ export default function IndiaCases({ statewise, setShowTable }) {
                       <TableCell component="th" scope="row">
                         {state}
                       </TableCell>
-                      <TableCell align="left">{confirmed}</TableCell>
-                      <TableCell align="left">{active}</TableCell>
-                      <TableCell align="left">{recovered}</TableCell>
-                      <TableCell align="left">{deaths}</TableCell>
+                      <TableCell align="left" style={{ color: "blue" }}>
+                        {confirmed}
+                      </TableCell>
+                      <TableCell align="left" style={{ color: "orange" }}>
+                        {active}
+                      </TableCell>
+                      <TableCell align="left" style={{ color: "green" }}>
+                        {recovered}
+                      </TableCell>
+                      <TableCell align="left" style={{ color: "red" }}>
+                        {deaths}
+                      </TableCell>
                     </TableRow>
                   );
                 })}
@@ -141,7 +165,7 @@ export default function IndiaCases({ statewise, setShowTable }) {
           </Table>
         </TableContainer>
         <TablePagination
-          rowsPerPageOptions={[10, 25, 100]}
+          rowsPerPageOptions={[40, 80, 120]}
           component="div"
           count={rows.length}
           rowsPerPage={rowsPerPage}
