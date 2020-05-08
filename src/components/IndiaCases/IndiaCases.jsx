@@ -137,7 +137,7 @@ export default function IndiaCases({ statewise, setShowTable }) {
                       style={
                         state === "Total"
                           ? {
-                              backgroundColor: "teal",
+                              backgroundColor: "rgba(0,128,128,0.3)",
                               textDecoration: "underline",
                             }
                           : {}
