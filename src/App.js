@@ -55,6 +55,7 @@ export default class App extends Component {
         {!showStateWise ? (
           <div className={styles.container}>
             <Button
+              className={styles.indiaButton}
               onClick={() =>
                 this.setState({
                   ...this.state,
@@ -62,7 +63,7 @@ export default class App extends Component {
                 })
               }
             >
-              Click for India.
+              Click To View Cases In India.
             </Button>
             <Cards data={data} />
             <CountryPicker handleCountryChange={this.handleCountryChange} />

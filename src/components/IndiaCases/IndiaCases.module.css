@@ -6,9 +6,24 @@
 
 .buttonBack {
   padding-top: 5px;
-  margin-left: auto;
+  margin: auto !important ;
 }
 
 .Total {
   background-color: rgb(247, 113, 113) !important;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  min-width: 50%;
+  max-width: 90%;
+  height: auto;
+}
+
+.tableRow {
+  max-width: "auto";
+  margin: "3% 5%";
 }
